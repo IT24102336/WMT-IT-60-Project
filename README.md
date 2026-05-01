@@ -322,3 +322,4 @@ To validate the database setup:
 cd lifeline-backend-deploy
 node src/scripts/validateDB.js
 ```
+# WMT-IT-60-Project
