@@ -19,3 +19,4 @@ export const getDefaultLocationSelection = () => {
     const district = getDistrictsByProvince(province)[0] || '';
     return { province, district };
 };
+       
