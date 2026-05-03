@@ -1,3 +1,4 @@
+// Maps each Sri Lankan province to the districts shown in location selectors.
 export const LOCATION_DATA = {
     'Western Province': ['Colombo District', 'Gampaha District', 'Kalutara District'],
     'Central Province': ['Kandy District', 'Matale District', 'Nuwara Eliya District'],
@@ -10,10 +11,13 @@ export const LOCATION_DATA = {
     'Sabaragamuwa Province': ['Ratnapura District', 'Kegalle District']
 };
 
+// Exposes province names as a simple array for dropdown components.
 export const PROVINCES = Object.keys(LOCATION_DATA);
 
+// Returns the districts for a selected province, or an empty list if nothing matches.
 export const getDistrictsByProvince = (province) => LOCATION_DATA[province] || [];
 
+// Provides a safe default province/district pair for initializing forms.
 export const getDefaultLocationSelection = () => {
     const province = PROVINCES[0] || '';
     const district = getDistrictsByProvince(province)[0] || '';

@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 
+// Defines the stored structure for blood donation camp records.
 const campSchema = new mongoose.Schema(
   {
     name: {
@@ -7,6 +8,7 @@ const campSchema = new mongoose.Schema(
       required: true,
       trim: true
     },
+    // Province and district support location-based filtering in the app.
     province: {
       type: String,
       required: true
@@ -23,6 +25,7 @@ const campSchema = new mongoose.Schema(
       type: String,
       required: true
     },
+    // Time fields are optional so camps can still be listed before exact slots are finalized.
     startTime: String,
     endTime: String,
     campStatus: {
@@ -30,12 +33,14 @@ const campSchema = new mongoose.Schema(
       enum: ["UPCOMING", "ONGOING", "ENDED"],
       default: "UPCOMING"
     },
+    // Tracks how many authenticated users expressed interest in the camp.
     interestedCount: {
       type: Number,
       default: 0
     }
   },
   {
+    // Automatically stores createdAt and updatedAt timestamps.
     timestamps: true
   }
 );

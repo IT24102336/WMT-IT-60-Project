@@ -2,11 +2,13 @@ const Camp = require("../models/Camp");
 const asyncHandler = require("../utils/asyncHandler");
 const { serializeCamp } = require("../utils/serializers");
 
+// Returns all camps sorted by date so the client can display the upcoming list consistently.
 const getCamps = asyncHandler(async (req, res) => {
   const camps = await Camp.find({}).sort({ date: 1 });
   res.status(200).json(camps.map(serializeCamp));
 });
 
+// Creates a new camp after checking the minimum required fields.
 const createCamp = asyncHandler(async (req, res) => {
   const { name, province, district, nearestHospital, location, address, googleMapLink, date, startTime, endTime, campStatus } = req.body;
 
@@ -32,6 +34,7 @@ const createCamp = asyncHandler(async (req, res) => {
   res.status(201).json(serializeCamp(camp));
 });
 
+// Updates an existing camp record with the values sent by the admin panel.
 const updateCamp = asyncHandler(async (req, res) => {
   const { name, province, district, nearestHospital, location, address, googleMapLink, date, startTime, endTime, campStatus } = req.body;
 
@@ -64,6 +67,7 @@ const updateCamp = asyncHandler(async (req, res) => {
   res.status(200).json(serializeCamp(camp));
 });
 
+// Deletes a camp once the target record has been confirmed to exist.
 const deleteCamp = asyncHandler(async (req, res) => {
   const camp = await Camp.findById(req.params.id);
 
@@ -79,6 +83,7 @@ const deleteCamp = asyncHandler(async (req, res) => {
   });
 });
 
+// Increments the visible interest counter for a camp.
 const markInterest = asyncHandler(async (req, res) => {
   const camp = await Camp.findById(req.params.id);
 
